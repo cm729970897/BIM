@@ -1,6 +1,7 @@
 const local = require('../../utils/local.js');
 const food = require('../../utils/food.js');
 const online = require('../../utils/online-nutrition.js');
+const createShareCard = require('../../utils/share.js');
 
 const makeMessage = (id, role, content) => ({
   id,
@@ -91,6 +92,6 @@ Page({behaviors: [require('../../behaviors/theme.js')],
   },
 
   onShareAppMessage() {
-    return { title: '健康体重管理 - AI健康助手', path: '/pages/ai-chat/index' };
+    return createShareCard('/pages/ai-chat/index', '健康体重管理 - AI健康助手');
   },
 });

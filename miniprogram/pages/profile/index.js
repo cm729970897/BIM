@@ -1,6 +1,7 @@
 const app = getApp();
 const helpers = require('../../utils/helpers.js');
 const local = require('../../utils/local.js');
+const createShareCard = require('../../utils/share.js');
 
 Page({
   data: { user: {}, bgCss: '', bgImg: '', themeKey: '' },
@@ -37,6 +38,6 @@ Page({
   },
 
   onShareAppMessage() {
-    return { title: '健康体重管理 - 记录体重、饮食、运动', path: '/pages/index/index' };
+    return createShareCard();
   },
 });

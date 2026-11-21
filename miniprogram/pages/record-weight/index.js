@@ -1,6 +1,7 @@
 ﻿const local = require('../../utils/local.js');
 const H = require('../../utils/helpers.js');
 const food = require('../../utils/food.js');
+const createShareCard = require('../../utils/share.js');
 
 const MEAL_LABELS = { breakfast: '早餐', lunch: '午餐', dinner: '晚餐', snack: '加餐' };
 const EXERCISE_TYPES = [
@@ -13,26 +14,52 @@ Page({
   behaviors: [require('../../behaviors/theme.js')],
   data: {
     activeRecord: 'weight',
-    weight: '', date: new Date().toISOString().slice(0, 10), height: null, bmi: null, bmiStatus: '', bmiPercent: null, records: [],
-    dietDate: new Date().toISOString().slice(0, 10), foodName: '', foodKcal: '', foodResults: [], meal: 'lunch', selected: [], totalKcal: 0, dietHistory: [],
-    exerciseDate: new Date().toISOString().slice(0, 10), types: EXERCISE_TYPES.map(t => t.label), typeIdx: 3, metText: 5.0, exerciseName: '', duration: '', weightKg: null, kcal: 0, kcalHint: '', todayCal: 0, todayMin: 0, exerciseRecords: []
+    weight: '', date: '', height: null, bmi: null, bmiStatus: '', bmiPercent: null, records: [],
+    dietDate: '', foodName: '', foodKcal: '', foodResults: [], meal: 'lunch', selected: [], totalKcal: 0, dietHistory: [],
+    exerciseDate: '', types: EXERCISE_TYPES.map(t => t.label), typeIdx: 3, metText: 5.0, exerciseName: '', duration: '', weightKg: null, kcal: 0, kcalHint: '', todayCal: 0, todayMin: 0, exerciseRecords: []
   },
-  onLoad() { this.refreshWeight(); this.loadDietHistory(); this.loadExerciseWeight(); this.loadExerciseDay(); },
   onShow() {
+    this.refreshDefaultDates(true);
     const pending = wx.getStorageSync('__record_active_panel__');
     if (pending) { wx.removeStorageSync('__record_active_panel__'); this.setData({ activeRecord: pending }); }
     this.refreshWeight(); this.loadDietHistory(); this.loadExerciseWeight(); this.loadExerciseDay();
   },
+  refreshDefaultDates(resetEmptyDrafts = false) {
+    const today = H.dateFormat();
+    const manual = this.manualDates || (this.manualDates = {});
+    const drafts = {
+      date: this.data.weight,
+      dietDate: this.data.selected.length || this.data.foodName,
+      exerciseDate: this.data.duration || this.data.exerciseName
+    };
+    const updates = {};
+    for (const field of Object.keys(drafts)) {
+      // Preserve a manually dated draft, but do not reopen an empty form on a past date.
+      if (resetEmptyDrafts && !drafts[field]) delete manual[field];
+      if (!manual[field] && this.data[field] !== today) updates[field] = today;
+    }
+    if (Object.keys(updates).length) this.setData(updates);
+  },
+  selectRecordDate(field, date) {
+    if (!this.manualDates) this.manualDates = {};
+    this.manualDates[field] = true;
+    this.setData({ [field]: date });
+  },
+  resetRecordDate(field) {
+    if (this.manualDates) delete this.manualDates[field];
+    return H.dateFormat();
+  },
   switchRecord(e) {
     const activeRecord = e.currentTarget.dataset.p;
     if (!['weight', 'diet', 'exercise'].includes(activeRecord)) return;
+    this.refreshDefaultDates();
     this.setData({ activeRecord });
     if (activeRecord === 'weight') this.refreshWeight();
     if (activeRecord === 'diet') this.loadDietHistory();
     if (activeRecord === 'exercise') { this.loadExerciseWeight(); this.loadExerciseDay(); }
     wx.pageScrollTo({ scrollTop: 0, duration: 0 });
   },
-  onDate(e) { this.setData({ date: e.detail.value }); },
+  onDate(e) { this.selectRecordDate('date', e.detail.value); },
   onWeight(e) {
     const weight = e.detail.value, height = this.data.height; let bmi = null, bmiStatus = '', bmiPercent = null;
     if (height) { bmi = H.calcBMI(+weight, +height); bmiStatus = bmi != null ? H.bmiStatus(bmi) : ''; if (bmi != null) bmiPercent = Math.max(0, Math.min(100, ((bmi - 14) / 16) * 100)); }
@@ -43,9 +70,9 @@ Page({
     const { weight, date } = this.data;
     if (!weight) return wx.showToast({ title: '请输入体重', icon: 'none' });
     local.saveWeight({ date, weight: +weight }); wx.showToast({ title: '记录成功', icon: 'success' });
-    this.setData({ weight: '', bmi: null, bmiStatus: '', bmiPercent: null }); this.refreshWeight();
+    this.setData({ date: this.resetRecordDate('date'), weight: '', bmi: null, bmiStatus: '', bmiPercent: null }); this.refreshWeight();
   },
-  onDietDate(e) { this.setData({ dietDate: e.detail.value, selected: [], totalKcal: 0, foodName: '', foodKcal: '', foodResults: [] }); },
+  onDietDate(e) { this.selectRecordDate('dietDate', e.detail.value); this.setData({ selected: [], totalKcal: 0, foodName: '', foodKcal: '', foodResults: [] }); },
   loadDietHistory() {
     const dietHistory = (local.listDiet() || [])
       .slice()
@@ -68,10 +95,10 @@ Page({
   submitDiet() {
     if (!this.data.selected.length) return wx.showToast({ title: '请先添加食物', icon: 'none' });
     const totalKcal = this.recount(this.data.selected); local.saveDiet({ date: this.data.dietDate, meals: this.data.selected, totalKcal, meal: this.data.meal });
-    wx.showToast({ title: '记录成功', icon: 'success' }); this.setData({ selected: [], totalKcal: 0, foodName: '', foodKcal: '', foodResults: [] }); this.loadDietHistory();
+    wx.showToast({ title: '记录成功', icon: 'success' }); this.setData({ dietDate: this.resetRecordDate('dietDate'), selected: [], totalKcal: 0, foodName: '', foodKcal: '', foodResults: [] }); this.loadDietHistory();
   },
   loadExerciseWeight() { this.setData({ weightKg: (local.getUser() || {}).weight || null }); },
-  onExerciseDate(e) { this.setData({ exerciseDate: e.detail.value }); this.loadExerciseDay(); },
+  onExerciseDate(e) { this.selectRecordDate('exerciseDate', e.detail.value); this.loadExerciseDay(); },
   onExerciseType(e) { const typeIdx = +e.detail.value; this.setData({ typeIdx, metText: EXERCISE_TYPES[typeIdx].met }); this.recalc(this.data.duration); },
   onExerciseField(e) { const field = e.currentTarget.dataset.f; this.setData({ [field]: e.detail.value }); if (field === 'duration') this.recalc(e.detail.value); },
   recalc(duration) {
@@ -92,10 +119,10 @@ Page({
     const minutes = +this.data.duration || 0; if (!minutes) return wx.showToast({ title: '请填写运动时长', icon: 'none' }); if (!this.data.weightKg) return wx.showToast({ title: '请先填写体重后再记录', icon: 'none' });
     const type = EXERCISE_TYPES[this.data.typeIdx], calories = calcKcal(type.met, this.data.weightKg, minutes);
     local.saveExercise({ date: this.data.exerciseDate, name: this.data.exerciseName || type.label, duration: minutes, calories, type: type.label }); wx.showToast({ title: '记录成功，消耗' + calories + 'kcal', icon: 'success' });
-    this.setData({ exerciseName: '', duration: '', kcal: 0, kcalHint: '' }); this.loadExerciseDay();
+    this.setData({ exerciseDate: this.resetRecordDate('exerciseDate'), exerciseName: '', duration: '', kcal: 0, kcalHint: '' }); this.loadExerciseDay();
   },
 
   onShareAppMessage() {
-    return { title: '健康体重管理 - 记录体重、饮食、运动', path: '/pages/record-weight/index' };
+    return createShareCard('/pages/record-weight/index');
   },
 });

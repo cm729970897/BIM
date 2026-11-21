@@ -10,24 +10,10 @@
 - 食谱与训练：内置精选食谱、收藏、菜单和训练计划。
 - 离线健康助手：基于本地规则给出饮食、运动、睡眠和体重波动建议，不调用付费 AI 服务。
 - 联网营养查询：食物热量查询优先请求 Open Food Facts 开放营养数据库（权威、免费、无需密钥），显示数据来源与更新时间；断网或请求失败时自动回退本地食物库，不影响助手其它功能。
+- 分享小程序：在「我的」点击「分享给好友」，发送不含个人记录的微信小程序卡片。
 - 数据管理：在设置页导出或清空本地数据（如安装包中该页已启用）。
 
 > 健康建议仅供日常健康管理参考，不能替代医生的诊断、治疗或处方。联网查询的营养数据来自第三方开放数据库，数值可能因产品/批次存在差异，仅供参考，不构成医疗建议。
-
-## 项目结构
-
-与 [health-recipe](https://github.com/sssong-sr/health-recipe) 保持同类目录组织：
-
-```text
-miniprogram/              # 微信小程序前端
-  behaviors/              # 页面共用行为
-  pages/                  # 按功能拆分的页面
-  components/             # 可复用展示组件
-  utils/                  # 健康计算、本地仓储、内置食物数据
-  static/                 # 静态资源
-scripts/                  # 本地检查脚本
-project.config.json       # 微信开发者工具项目配置
-```
 
 ## 在微信开发者工具中运行
 
@@ -87,9 +73,10 @@ https://world.openfoodfacts.org
 
 ```powershell
 node scripts/check-offline.js
+node scripts/check-record-dates.js
 ```
 
-检查会确认前端没有云函数调用，并检查 JavaScript 基本语法。
+检查涵盖前端 JavaScript 语法、云函数调用以及记录页跨天默认日期和手动补录。
 
 ## License
 

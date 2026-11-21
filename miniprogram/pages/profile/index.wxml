@@ -26,6 +26,7 @@
       <view class="mi" bindtap="go" data-p="settings" hover-class="mi-hover"><view class="ic ic-set"></view><text class="mt">应用设置</text><text class="mr">›</text></view>
     </view>
 
+    <button class="btn-primary btn-share" open-type="share">分享给好友</button>
     <button class="btn-logout" bindtap="logout">退出登录</button>
   </view>
 </view>
