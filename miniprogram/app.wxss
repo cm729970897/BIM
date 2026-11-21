@@ -1,0 +1,144 @@
+page {
+  font-size: 28rpx;
+  color: #1C1C1E;
+  background-color: #F2F5F2;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  --accent: #3A7D44;
+  --accent-dark: #2F6A37;
+  --accent-soft: #EFF7EF;
+}
+
+.container {
+  padding: 24rpx 28rpx;
+  box-sizing: border-box;
+}
+
+.header {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #1C1C1E;
+  padding: 24rpx 28rpx;
+}
+
+.card {
+  background: #FFFFFF;
+  border-radius: 24rpx;
+  padding: 28rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 1rpx 3rpx rgba(0, 0, 0, 0.04), 0 8rpx 24rpx rgba(0, 0, 0, 0.06);
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #FFFFFF;
+  border-radius: 40rpx;
+  padding: 18rpx 0;
+  font-size: 30rpx;
+  text-align: center;
+}
+
+.btn-primary:active {
+  opacity: 0.85;
+}
+
+.divider {
+  height: 1rpx;
+  background: #EEF3EE;
+  margin: 20rpx 0;
+}
+
+.label {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.placeholder {
+  text-align: center;
+  color: #999;
+  padding: 80rpx 0;
+}
+
+/* 全局主题：CSS 变量随根容器 theme-xxx 类切换（按钮/重点色/容器背景） */
+.theme-green {
+  --accent: #3A7D44;
+  --accent-dark: #2F6A37;
+  --accent-soft: #EFF7EF;
+}
+.theme-pink {
+  --accent: #D17D94;
+  --accent-dark: #AF5B72;
+  --accent-soft: #FBEFF3;
+}
+.theme-pink page,
+.theme-pink { background-color: #FBEFF3; }
+.theme-pink .header { color: #8A4256; }
+.theme-pink .divider { background: #F3DCE4; }
+
+/* 粉色主题：主按钮 / 保存 / 添删 / 查询 / 发送 等强调按钮统一切粉 */
+.theme-pink .btn-primary,
+.theme-pink .btn-submit,
+.theme-pink .btn-save,
+.theme-pink .btn-add,
+.theme-pink .btn-add-text,
+.theme-pink .add-btn,
+.theme-pink .food-btn { background: var(--accent-dark); color: #fff; border-color: transparent; }
+.theme-pink .btn-primary::after,
+.theme-pink .btn-submit::after,
+.theme-pink .btn-save::after,
+.theme-pink .btn-add::after { border: none; }
+.theme-pink .btn-primary-hover,
+.theme-pink .btn-submit-active { background: var(--accent); }
+.theme-pink .btn-secondary { color: var(--accent-dark); border-color: var(--accent); }
+.theme-pink .btn-logout { color: #AF5B72; }
+
+/* 粉色主题：其余强调按钮 / 选中态 / 图标随主题（只读审查补充） */
+.theme-pink .send,
+.theme-pink .meal.on,
+.theme-pink .qchip.on,
+.theme-pink .w-card.on { border-color: var(--accent); }
+.theme-pink .send,
+.theme-pink .meal.on { background: var(--accent-dark); color: #fff; }
+.theme-pink .send::after,
+.theme-pink .food-btn::after { border: none; }
+.theme-pink .record-card { background: linear-gradient(135deg, var(--accent-dark), var(--accent)); }
+.theme-pink .ic-add { background: var(--accent-dark); }
+.theme-pink .ic-add.w-on { background: var(--accent); }
+.theme-pink .bubble.user,
+.theme-pink .avatar.assistant { background: var(--accent-dark); }
+.theme-pink .skcal,
+.theme-pink .day-kcal,
+.theme-pink .er-kcal,
+.theme-pink .bmi-live,
+.theme-pink .summary { color: var(--accent-dark); }
+.theme-pink .btn-submit { background: var(--accent-soft); color: var(--accent-dark); border-color: var(--accent); }
+.theme-green .send,
+.theme-green .btn-add,
+.theme-green .food-btn { background: var(--accent-dark); color: #fff; border-color: transparent; }
+.theme-green .send::after,
+.theme-green .btn-add::after,
+.theme-green .food-btn::after,
+.theme-green .btn-save::after { border: none; }
+
+/* 纯文字紧凑按钮：清除微信默认边框/背景，按钮底色交由主题类提供 */
+button.send::after,
+button.food-btn::after,
+button.btn-add::after,
+button.add-btn::after,
+button.btn-save::after,
+button.btn-submit::after,
+button.btn-primary::after,
+button.btn-secondary::after { border: none; background: none; }
+/* Compact text-first action controls. */
+button::after { border: none; }
+.btn-primary, .btn-submit, .btn-save, .btn-add, .add-btn, .food-btn, .send {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", "PingFang SC", "Hiragino Sans GB", sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+.theme-pink .send { background: var(--accent-dark); color: #fff; border-color: transparent; }
+/* Shared iOS action baseline: compact, text-led and free of default button chrome. */
+button {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", "PingFang SC", "Hiragino Sans GB", sans-serif;
+  font-weight: 600;
+  -webkit-tap-highlight-color: transparent;
+}
+button::after { border: none; }

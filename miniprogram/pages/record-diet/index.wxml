@@ -1,0 +1,67 @@
+<view class="container theme-{{themeKey}}">
+  <view class="record-center">
+    <view class="rc-item" bindtap="goRecord" data-p="record-weight"><view class="rc-icon rc-scale"></view><text class="rc-text">记录体重</text></view>
+    <view class="rc-item rc-on" bindtap="goRecord" data-p="record-diet"><view class="rc-icon rc-food"></view><text class="rc-text">记录饮食</text></view>
+    <view class="rc-item" bindtap="goRecord" data-p="record-exercise"><view class="rc-icon rc-run"></view><text class="rc-text">记录训练</text></view>
+  </view>
+  <view class="header">记录饮食</view>
+  <view class="date-bar">
+    <text class="date-label">记录日期</text>
+    <picker mode="date" value="{{date}}" bindchange="onDate">
+      <view class="date-val">{{date}}</view>
+    </picker>
+  </view>
+  <view class="meal-tabs">
+    <view class="meal {{meal==='breakfast'?'on':''}}" bindtap="pickMeal" data-m="breakfast">早餐</view>
+    <view class="meal {{meal==='lunch'?'on':''}}" bindtap="pickMeal" data-m="lunch">午餐</view>
+    <view class="meal {{meal==='dinner'?'on':''}}" bindtap="pickMeal" data-m="dinner">晚餐</view>
+    <view class="meal {{meal==='snack'?'on':''}}" bindtap="pickMeal" data-m="snack">加餐</view>
+  </view>
+
+  <view class="card food-entry">
+    <view class="title">添加食物</view>
+    <view class="entry-row">
+      <input class="entry-input food-name" value="{{foodName}}" bindinput="onFoodName" placeholder="食物名称，如：鸡蛋、米饭"/>
+      <input class="entry-input food-kcal" type="digit" value="{{foodKcal}}" bindinput="onFoodKcal" placeholder="每100克热量（自动带出）"/>
+      <button class="btn-add" bindtap="addFood">添加</button>
+    </view>
+    <view class="food-list" wx:if="{{foodResults.length}}">
+      <view class="food-item" wx:for="{{foodResults}}" wx:key="name" bindtap="chooseFood" data-f="{{item}}">
+        <text class="fname">{{item.name}}</text>
+        <text class="fmeta">{{item.kcal}} kcal / 100g</text>
+      </view>
+    </view>
+    <text class="entry-tip">可从建议中选择，也可直接填写名称和热量</text>
+  </view>
+
+  <view class="card">
+    <view class="title">本餐已选</view>
+    <view class="sum-item" wx:for="{{selected}}" wx:key="index">
+      <text class="sname">{{item.name}}</text>
+      <text class="sgram">{{item.grams}}g</text>
+      <text class="skcal">{{item.calcKcal}} kcal</text>
+      <text class="sdel" bindtap="delFood" data-i="{{index}}">删除</text>
+    </view>
+    <view class="placeholder" wx:if="{{!selected.length}}">还未选择食物，搜索或手动添加吧</view>
+    <view class="sum-row">
+      <text class="lbl">本餐热量合计</text>
+      <text class="total">{{totalKcal}} kcal</text>
+    </view>
+  </view>
+
+  <view class="action-row"><button class="btn-primary" bindtap="submit">保存</button></view>
+
+  <view class="card">
+    <view class="title">当日已记录</view>
+    <view class="day-item" wx:for="{{dayRecords}}" wx:key="index">
+      <view class="day-head">
+        <text class="day-meal">{{item.mealLabel}}</text>
+        <text class="day-kcal">{{item.totalKcal}} kcal</text>
+      </view>
+      <view class="day-foods" wx:if="{{item.meals.length}}">
+        <text class="day-food" wx:for="{{item.meals}}" wx:for-item="f" wx:key="index">{{f.name}} {{f.grams}}g<text wx:if="{{index < item.meals.length - 1}}">、</text></text>
+      </view>
+    </view>
+    <view class="placeholder" wx:if="{{!dayRecords.length}}">该日暂无饮食记录</view>
+  </view>
+</view>

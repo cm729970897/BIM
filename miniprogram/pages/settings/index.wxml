@@ -1,0 +1,28 @@
+<view class="container theme-{{themeKey}}">
+  <view class="section-title">数据</view>
+  <view class="group">
+    <view class="row-info">
+      <view class="ic ic-data"></view>
+      <view class="row-text">
+        <text class="row-title">本地数据</text>
+        <text class="row-sub">所有记录保存在本机，可随时导出备份或清空重置</text>
+      </view>
+    </view>
+  </view>
+  <text class="group-footer">你的体重、饮食、运动、打卡等数据均仅保存在本机，不会上传到任何服务器。</text>
+
+  <view class="section-title">操作</view>
+  <view class="group">
+    <view class="mi" bindtap="exportData" hover-class="mi-hover">
+      <view class="ic ic-exp"></view>
+      <text class="mt">导出数据</text>
+      <text class="mr">复制到剪贴板 ›</text>
+    </view>
+    <view class="mi danger" bindtap="clearData" hover-class="mi-hover">
+      <view class="ic ic-clr"></view>
+      <text class="mt">清空数据</text>
+      <text class="mr">›</text>
+    </view>
+  </view>
+  <text class="group-footer danger-text">清空操作不可恢复，请先导出备份。</text>
+</view>

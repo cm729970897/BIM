@@ -1,0 +1,1 @@
+<view class="container theme-{{themeKey}}"><view class="header">对话历史</view><view class="card" wx:for="{{list}}" wx:key="id" bindtap="backChat"><text class="ct">{{item.first}}</text><text class="cd">{{item.time}}</text></view><view class="placeholder" wx:if="{{!list.length}}">暂无历史记录</view></view>

@@ -1,0 +1,1 @@
+const local=require('../../utils/local.js');Page({behaviors: [require('../../behaviors/theme.js')], data:{list:[]},onShow(){this.setData({list:local.getFavorites()});},go(e){wx.navigateTo({url:'/pages/recipe-detail/index?id='+e.currentTarget.dataset.id});}});

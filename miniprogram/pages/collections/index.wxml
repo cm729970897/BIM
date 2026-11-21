@@ -1,0 +1,1 @@
+<view class="container theme-{{themeKey}}"><view class="header">我的收藏</view><view class="card" wx:for="{{list}}" wx:key="id" bindtap="go" data-id="{{item.id}}"><text>{{item.name}}</text><text class="meta">{{item.kcal}} kcal · 蛋白质 {{item.protein}}g</text></view><view class="placeholder" wx:if="{{!list.length}}">暂无收藏</view></view>

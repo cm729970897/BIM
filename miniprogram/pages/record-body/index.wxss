@@ -1,0 +1,8 @@
+.row { display: flex; align-items: center; padding: 18rpx 0; border-bottom: 1rpx solid #f0f0f0; }
+.label { font-size: 28rpx; color: #666; width: 240rpx; }
+.val { font-size: 28rpx; color: #333; padding: 8rpx 16rpx; border-bottom: 1rpx solid #eee; }
+.input { flex: 1; font-size: 28rpx; padding: 8rpx; border-bottom: 1rpx solid #eee; text-align: right; }
+.action-row { display: flex; justify-content: center; margin-top: 24rpx; }
+.action-row .btn-primary { width: auto; min-width: 132rpx; height: 58rpx; line-height: 58rpx; margin: 0; padding: 0 30rpx; border: none; border-radius: 16rpx; background: var(--accent-dark); color: #fff; font-size: 26rpx; font-weight: 600; box-shadow: none; }
+/* Save actions follow the iOS trailing-action convention. */
+.action-row { justify-content: flex-end; }

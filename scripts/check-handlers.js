@@ -1,0 +1,3 @@
+﻿const fs=require('fs'),path=require('path');const root='miniprogram/pages';const errors=[];
+for(const d of fs.readdirSync(root)){const f=path.join(root,d,'index.wxml'),j=path.join(root,d,'index.js');if(!fs.existsSync(f)||!fs.existsSync(j))continue;const src=fs.readFileSync(j,'utf8');for(const m of fs.readFileSync(f,'utf8').matchAll(/(?:bindtap|bindinput|bindchange)="([A-Za-z_$][\w$]*)"/g)){const name=m[1];if(!new RegExp('(?:^|[,{\\s])'+name+'\\s*\\(').test(src))errors.push(d+': '+name);}}
+if(errors.length){console.error(errors.join('\n'));process.exit(1)} console.log('WXML handler validation passed.');

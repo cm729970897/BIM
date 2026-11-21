@@ -1,0 +1,35 @@
+<view class="container theme-{{themeKey}}">
+  <view class="header">
+    <text class="title">创建健康档案</text>
+    <text class="sub">用 3 分钟，制定适合你的健康计划</text>
+  </view>
+
+  <view class="card">
+    <view class="row">
+      <text class="label">性别</text>
+      <view class="chip {{gender === 'male' ? 'on' : ''}}" bindtap="setGender" data-g="male">男</view>
+      <view class="chip {{gender === 'female' ? 'on' : ''}}" bindtap="setGender" data-g="female">女</view>
+    </view>
+    <view class="row"><text class="label">身高（cm）</text><input class="input" type="number" value="{{height}}" bindinput="onHeight" placeholder="例如 170" /></view>
+    <view class="row"><text class="label">当前体重（kg）</text><input class="input" type="digit" value="{{weight}}" bindinput="onWeight" placeholder="例如 65" /></view>
+    <view class="row"><text class="label">年龄 <text class="optional">（选填）</text></text><input class="input" type="number" value="{{age}}" bindinput="onAge" placeholder="例如 28" /></view>
+    <view class="row"><text class="label">日常活动</text><picker mode="selector" range="{{activityList}}" value="{{activityIdx}}" bindchange="onActivity"><text>{{activityList[activityIdx]}}</text></picker></view>
+  </view>
+
+  <view class="goal-card">
+    <text class="goal-title">我的目标 <text class="optional">（选填）</text></text>
+    <view class="goal-row">
+      <view class="goal {{goal === 'lose' ? 'active' : ''}}" bindtap="setGoal" data-g="lose">减脂</view>
+      <view class="goal {{goal === 'maintain' ? 'active' : ''}}" bindtap="setGoal" data-g="maintain">维持</view>
+      <view class="goal {{goal === 'gain' ? 'active' : ''}}" bindtap="setGoal" data-g="gain">增重</view>
+    </view>
+    <view wx:if="{{goal}}">
+      <view class="row"><text class="label">目标体重（kg）<text class="optional">（选填）</text></text><input type="digit" class="input" value="{{targetWeight}}" bindinput="onTarget" placeholder="例如 58" /></view>
+      <view class="row"><text class="label">目标日期</text><picker mode="date" value="{{targetDate}}" bindchange="onDate"><text>{{targetDate}}</text></picker></view>
+    </view>
+    <text class="goal-tip" wx:else>不设置目标也可以直接开始记录。</text>
+  </view>
+
+  <view class="preview-card" wx:if="{{preview}}"><text class="pv-label">BMI</text><text class="pv-val">{{preview.bmi}}</text><text class="pv-sub">{{preview.status}}</text><view class="divider"></view><text class="pv-label">建议每日热量</text><text class="pv-val">{{preview.cal != null ? preview.cal : '--'}} kcal</text></view>
+  <view class="action-row"><button class="btn-save" bindtap="saveAndLogin" disabled="{{saving}}">{{saving ? '正在保存...' : '保存'}}</button></view>
+</view>

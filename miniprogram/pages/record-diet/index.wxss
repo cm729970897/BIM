@@ -1,0 +1,74 @@
+.container { padding: calc(env(safe-area-inset-top) + 120rpx) 24rpx 40rpx; }
+.record-center { display: flex; gap: 16rpx; margin-bottom: 28rpx; }
+.rc-item {
+  flex: 1; padding: 20rpx 8rpx; text-align: center; background: #fff;
+  border: 2rpx solid transparent; border-radius: 20rpx;
+  box-shadow: 0 4rpx 14rpx rgba(31, 77, 42, .06);
+}
+.rc-item.rc-on { background: var(--accent-soft); border-color: var(--accent); }
+.rc-icon { display: block; position: relative; box-sizing: border-box; width: 32rpx; height: 32rpx; margin: 0 auto; }
+.rc-scale { border: 3rpx solid #5D6B60; border-radius: 9rpx 9rpx 11rpx 11rpx; }
+.rc-scale::before { content: ''; position: absolute; top: 7rpx; left: 50%; box-sizing: border-box; width: 10rpx; height: 10rpx; margin-left: -5rpx; border: 2rpx solid #5D6B60; border-radius: 50%; }
+.rc-scale::after { content: ''; position: absolute; top: 12rpx; left: 50%; width: 2rpx; height: 7rpx; background: #5D6B60; border-radius: 2rpx; transform: rotate(42deg); transform-origin: bottom; }
+.rc-food { border: 3rpx solid #5D6B60; border-radius: 50%; }
+.rc-food::before { content: ''; position: absolute; top: 5rpx; left: 13rpx; width: 3rpx; height: 19rpx; background: #5D6B60; border-radius: 2rpx; transform: rotate(34deg); }
+.rc-food::after { content: ''; position: absolute; top: 8rpx; left: 8rpx; box-sizing: border-box; width: 14rpx; height: 10rpx; border: 2rpx solid #5D6B60; border-radius: 50%; }
+.rc-run::before { content: ''; position: absolute; top: 1rpx; left: 13rpx; width: 7rpx; height: 7rpx; background: #5D6B60; border-radius: 50%; box-shadow: -5rpx 13rpx 0 -1rpx #5D6B60; }
+.rc-run::after { content: ''; position: absolute; top: 13rpx; left: 8rpx; width: 18rpx; height: 13rpx; border-bottom: 3rpx solid #5D6B60; border-left: 3rpx solid #5D6B60; border-radius: 2rpx; transform: skew(-18deg) rotate(-18deg); }
+.rc-on .rc-scale, .rc-on .rc-food { border-color: var(--accent-dark); }
+.rc-on .rc-scale::before, .rc-on .rc-food::after { border-color: var(--accent-dark); }
+.rc-on .rc-scale::after, .rc-on .rc-food::before, .rc-on .rc-run::before { background-color: var(--accent-dark); }
+.rc-on .rc-run::before { box-shadow: -5rpx 13rpx 0 -1rpx var(--accent-dark); }
+.rc-on .rc-run::after { border-color: var(--accent-dark); }
+.rc-text { display: block; margin-top: 8rpx; color: #333; font-size: 22rpx; }
+.rc-on .rc-text { color: var(--accent-dark); font-weight: 600; }
+
+.header { font-size: 34rpx; font-weight: 700; color: #1F4D2A; margin-bottom: 20rpx; }
+.meal-tabs { display: flex; gap: 12rpx; margin-bottom: 20rpx; }
+.meal { flex: 1; text-align: center; padding: 18rpx 0; border-radius: 20rpx; background: #F1F5F1; color: #666; font-size: 26rpx; }
+.meal.on { background: #3A7D44; color: #fff; font-weight: 600; }
+.card { background: #fff; border-radius: 20rpx; padding: 24rpx; margin-bottom: 20rpx; }
+.title { font-size: 26rpx; font-weight: 600; color: #333; margin-bottom: 14rpx; }
+.food-entry { margin-bottom: 20rpx; }
+.entry-row { display: flex; align-items: center; gap: 12rpx; }
+.entry-input { flex: 1; min-width: 0; height: 52rpx; line-height: 52rpx; padding: 0 18rpx; background: #F6FAF6; border: 1rpx solid #E3EAE3; border-radius: 14rpx; box-sizing: border-box; font-size: 26rpx; }
+.food-kcal { flex: 0 0 190rpx; }
+.entry-row .btn-add { display: inline-flex; flex: 0 0 100rpx; align-items: center; justify-content: center; width: 100rpx; min-width: 0; height: 52rpx; margin: 0; padding: 0; color: #fff; background: var(--accent-dark); border: none; border-radius: 14rpx; box-sizing: border-box; font-size: 25rpx; font-weight: 600; line-height: 52rpx; white-space: nowrap; }
+.entry-row .btn-add::after { border: none; }
+.food-list { max-height: 300rpx; overflow-y: auto; margin-top: 12rpx; }
+.food-item { padding: 14rpx 0; border-bottom: 1rpx solid #f5f5f5; }
+.fname { color: #333; font-size: 28rpx; }
+.fmeta { display: block; margin-top: 4rpx; color: #999; font-size: 22rpx; }
+.entry-tip { display: block; margin-top: 12rpx; color: #999; font-size: 22rpx; }
+.sum-item { display: flex; align-items: center; padding: 10rpx 0; }
+.sname { flex: 1; font-size: 26rpx; }
+.skcal { font-size: 24rpx; color: #3A7D44; margin-right: 12rpx; font-weight: 600; }
+.sgram { font-size: 22rpx; color: #999; margin-right: 12rpx; }
+.sdel { color: #ccc; font-size: 28rpx; padding: 0 10rpx; }
+.placeholder { text-align: center; color: #bbb; padding: 20rpx 0; }
+.sum-row { display: flex; justify-content: space-between; align-items: center; padding: 16rpx 0; border-top: 1rpx dashed #eee; margin-top: 12rpx; }
+.lbl { font-size: 26rpx; color: #666; }
+.total { font-size: 32rpx; color: #1F4D2A; font-weight: 700; }
+.btn-primary { width: auto; min-width: 132rpx; height: 56rpx; line-height: 56rpx; margin: 0; padding: 0 30rpx; background: var(--accent-dark); color: #fff; border: none; box-sizing: border-box; border-radius: 14rpx; font-size: 25rpx; font-weight: 600; }
+.btn-primary-hover { background: var(--accent); opacity: .88; }
+
+.date-bar { display: flex; align-items: center; justify-content: space-between; background: #fff; border-radius: 20rpx; padding: 20rpx 24rpx; margin-bottom: 20rpx; }
+.date-label { font-size: 26rpx; color: #666; }
+.date-val { font-size: 28rpx; color: #1F4D2A; font-weight: 600; }
+
+.day-item { padding: 20rpx 24rpx; border-bottom: 1rpx solid #f0f0f0; border-radius: 16rpx; }
+.day-item:last-child { border-bottom: 0; }
+.day-head { display: flex; justify-content: space-between; align-items: center; }
+.day-meal { font-size: 28rpx; font-weight: 600; color: #333; }
+.day-kcal { font-size: 32rpx; color: #3A7D44; font-weight: 700; }
+.day-foods { display: flex; flex-wrap: wrap; margin-top: 8rpx; }
+.day-food { font-size: 22rpx; color: #999; }
+/* Compact iOS text actions: add matches its input row, save is trailing. */
+.btn-add, .btn-primary { font-size: 25rpx; font-weight: 600; letter-spacing: .1rpx; border: none; box-shadow: none; }
+.btn-add::after, .btn-primary::after { border: none; }
+.btn-add:active { background: var(--accent); opacity: .9; }
+.btn-primary-hover { background: var(--accent); opacity: .88; }
+.meal.on { background: var(--accent-dark); }
+.theme-pink .skcal, .theme-pink .day-kcal, .theme-pink .date-val { color: var(--accent-dark); }
+.action-row { display: flex; justify-content: flex-end; margin: 24rpx 0 4rpx; }
+.action-row .btn-primary { width: auto; min-width: 132rpx; height: 56rpx; line-height: 56rpx; margin: 0; padding: 0 30rpx; border: none; border-radius: 14rpx; background: var(--accent-dark); color: #fff; font-size: 25rpx; font-weight: 600; box-shadow: none; box-sizing: border-box; }

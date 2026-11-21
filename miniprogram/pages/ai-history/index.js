@@ -1,0 +1,1 @@
+const local=require('../../utils/local.js');Page({behaviors: [require('../../behaviors/theme.js')], data:{list:[]},onShow(){this.setData({list:local.getChats().map(x=>({id:x.id,first:x.first,time:x.time}))});},backChat(){wx.navigateBack();}});

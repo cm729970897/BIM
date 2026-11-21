@@ -1,0 +1,6 @@
+{
+  "rules": [
+    { "action": "allow", "page": "*" },
+    { "action": "disallow", "schemes": ["https://*.baidu.com/*"] }
+  ]
+}

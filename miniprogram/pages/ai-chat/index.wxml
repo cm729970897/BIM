@@ -1,0 +1,51 @@
+<view class="chat-wrap theme-{{themeKey}}">
+  <view class="food-card">
+    <view class="food-title">食物热量查询</view>
+    <view class="food-row">
+      <input class="food-input" value="{{foodKeyword}}" bindinput="onFoodInput" bindconfirm="onFoodConfirm" placeholder="输入食物名称，如：鸡蛋 / 鸡胸肉 / 苹果" confirm-type="search" />
+      <button class="food-btn" bindtap="searchFood">查询</button>
+    </view>
+    <view class="food-tip">本地优先，未找到时联网查询；数值为每100克可食部的热量与营养，仅供参考。</view>
+    <view class="food-loading" wx:if="{{foodLoading}}">正在查询「{{foodKeyword}}」…</view>
+    <view class="food-src" wx:if="{{foodSearched && !foodLoading && !foodEmpty}}">参考：{{foodSource}}</view>
+    <view class="food-results" wx:if="{{foodSearched && !foodLoading}}">
+      <view class="food-empty" wx:if="{{foodEmpty}}">联网与本地均未找到「{{foodKeyword}}」的热量信息，试试其他食物名称，例如：米饭、鸡蛋、鸡胸肉。</view>
+      <view class="food-item" wx:for="{{foodResults}}" wx:key="name">
+        <view class="food-item-head"><text class="food-name">{{item.name}}</text><text class="food-unit">{{item.unit}}</text></view>
+        <view class="food-meta">
+          <view class="fm"><text class="fm-v">{{item.kcal}}</text><text class="fm-l">kcal</text></view>
+          <view class="fm"><text class="fm-v">{{item.protein}}g</text><text class="fm-l">蛋白质</text></view>
+          <view class="fm"><text class="fm-v">{{item.fat}}g</text><text class="fm-l">脂肪</text></view>
+          <view class="fm"><text class="fm-v">{{item.carbs}}g</text><text class="fm-l">碳水</text></view>
+        </view>
+        <view class="food-tags" wx:if="{{item.tags.length}}"><text class="ftag" wx:for="{{item.tags}}" wx:key="*this">{{item}}</text></view>
+      </view>
+    </view>
+  </view>
+  <view class="chat-bar">
+    <text class="cb-title">AI 健康助手</text>
+    <text class="cb-sub">本地数据优先 · 联网补充</text>
+    <text class="cb-hist" bindtap="goHistory">历史</text>
+  </view>
+  <scroll-view scroll-y scroll-into-view="{{toView}}" class="chat-list">
+    <view class="msg" id="m{{index}}" wx:for="{{messages}}" wx:key="id">
+      <view class="avatar {{item.role}}">{{item.role === 'user' ? '我' : 'AI'}}</view>
+      <view class="bubble {{item.role}}">
+        <block wx:if="{{item.role === 'assistant'}}">
+          <text class="reply-line" wx:for="{{item.lines}}" wx:key="*this">{{item}}</text>
+        </block>
+        <text wx:else>{{item.content}}</text>
+      </view>
+    </view>
+  </scroll-view>
+  <view class="quick-row">
+    <text class="qchip" bindtap="quick" data-t="今天吃什么">推荐饮食</text>
+    <text class="qchip" bindtap="quick" data-t="减脂运动计划">运动计划</text>
+    <text class="qchip" bindtap="quick" data-t="如何计算热量">热量计算</text>
+    <text class="qchip" bindtap="quick" data-t="体重波动怎么办">体重趋势</text>
+  </view>
+  <view class="input-row">
+    <input class="input" value="{{input}}" bindinput="onInput" placeholder="输入你的问题，获取健康建议" confirm-type="send" />
+    <button class="send" bindtap="send">发送</button>
+  </view>
+</view>

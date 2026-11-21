@@ -1,0 +1,11 @@
+{
+  "pages": ["pages/setup/index", "pages/index/index", "pages/record-weight/index", "pages/record-body/index", "pages/record-diet/index", "pages/record-exercise/index", "pages/recipes/index", "pages/recipe-detail/index", "pages/my-menu/index", "pages/training/index", "pages/trends/index", "pages/ai-chat/index", "pages/health-calendar/index", "pages/ai-history/index", "pages/weekly-report/index", "pages/profile/index", "pages/achievements/index", "pages/calculator/index", "pages/collections/index", "pages/goals/index", "pages/settings/index", "pages/wallpaper/index"],
+  "window": {"navigationBarBackgroundColor":"#3A7D44","navigationBarTitleText":"健康体重管理","navigationBarTextStyle":"white","backgroundColor":"#F2F5F2","backgroundTextStyle":"dark"},
+  "tabBar": {"color":"#8E8E93","selectedColor":"#3A7D44","backgroundColor":"#FFFFFF","borderStyle":"white","list":[
+    {"pagePath":"pages/index/index","text":"首页","iconPath":"static/tab-home.png","selectedIconPath":"static/tab-home-active.png"},
+    {"pagePath":"pages/record-weight/index","text":"记录","iconPath":"static/tab-record.png","selectedIconPath":"static/tab-record-active.png"},
+    {"pagePath":"pages/ai-chat/index","text":"助手","iconPath":"static/tab-ai.png","selectedIconPath":"static/tab-ai-active.png"},
+    {"pagePath":"pages/profile/index","text":"我的","iconPath":"static/tab-user.png","selectedIconPath":"static/tab-user-active.png"}
+  ]},
+  "networkTimeout":{"request":15000,"uploadFile":15000,"downloadFile":15000},"debug":false,"style":"v2"
+}

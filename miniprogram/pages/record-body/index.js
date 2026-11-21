@@ -1,0 +1,2 @@
+const local = require('../../utils/local.js');
+Page({behaviors: [require('../../behaviors/theme.js')],  data: { date: new Date().toISOString().slice(0, 10), weight: '', waist: '', hip: '', thigh: '', chest: '', bodyFat: '' }, set(e) { this.setData({ [e.currentTarget.dataset.f]: e.detail.value }); }, onDate(e) { this.setData({ date: e.detail.value }); }, submit() { local.saveBody({ ...this.data }); wx.showToast({ title: '记录成功', icon: 'success' }); } });

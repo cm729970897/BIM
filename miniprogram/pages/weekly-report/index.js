@@ -1,0 +1,1 @@
+const local=require('../../utils/local.js');Page({behaviors: [require('../../behaviors/theme.js')], data:{report:null},onShow(){this.setData({report:local.buildWeeklyReport()});}});

@@ -1,0 +1,28 @@
+.tags { display: flex; flex-wrap: wrap; gap: 10rpx; margin-bottom: 20rpx; }
+.tag { padding: 10rpx 24rpx; border-radius: 20rpx; background: #F1F5F1; color: #666; font-size: 24rpx; }
+.tag.on { background: #3A7D44; color: #fff; }
+.grid { display: flex; flex-wrap: wrap; gap: 16rpx; }
+.recipe-card { flex: 0 0 46%; background: #fff; border-radius: 20rpx; overflow: hidden; box-shadow: 0 4rpx 16rpx rgba(58,125,68,0.06); }
+.r-img { height: 180rpx; display: flex; align-items: center; justify-content: center; }
+.r-emoji { font-size: 60rpx; }
+.r-info { padding: 14rpx 16rpx; }
+.r-name { font-size: 26rpx; color: #333; font-weight: 600; }
+.r-tags { margin-top: 6rpx; display: flex; gap: 6rpx; flex-wrap: wrap; }
+.rt { font-size: 20rpx; color: #3A7D44; background: #E8F3E6; padding: 3rpx 10rpx; border-radius: 8rpx; }
+.r-meta { display: flex; gap: 16rpx; margin-top: 8rpx; font-size: 22rpx; color: #999; }
+.placeholder { text-align: center; color: #999; padding: 60rpx 0; }
+.add-bar { margin-bottom: 16rpx; }
+.add-btn { background: #3A7D44; color: #fff; }
+.add-form { background: #fff; border-radius: 16rpx; padding: 20rpx; margin-bottom: 20rpx; box-shadow: 0 4rpx 16rpx rgba(58,125,68,0.08); }
+.form-title { font-size: 28rpx; font-weight: 600; color: #333; margin-bottom: 16rpx; }
+.form-input, .form-area { border: 1rpx solid #E3EAE3; border-radius: 12rpx; padding: 14rpx 16rpx; font-size: 26rpx; margin-bottom: 14rpx; width: 100%; box-sizing: border-box; }
+.form-area { min-height: 120rpx; }
+.form-btns { display: flex; gap: 16rpx; margin-top: 8rpx; }
+.form-btns button { flex: 1; font-size: 28rpx; border-radius: 40rpx; height: 72rpx; line-height: 72rpx; }
+.btn-cancel { background: #fff; color: #666; border: 1rpx solid #ddd; }
+.btn-save { background: #3A7D44; color: #fff; }
+.form-btns { justify-content: flex-end; }
+.form-btns button { flex: none; width: auto; min-width: 116rpx; height: 56rpx; line-height: 56rpx; padding: 0 22rpx; border-radius: 16rpx; font-size: 25rpx; }
+.btn-save { background: var(--accent-dark); }
+/* Recipe form save is always the trailing action. */
+.form-btns { justify-content: flex-end; }

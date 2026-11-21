@@ -1,0 +1,31 @@
+<view class="container theme-{{themeKey}}">
+  <view class="bg-layer" wx:if="{{bgCss}}" style="background: {{bgCss}};"><view class="bg-mask"></view></view>
+  <view class="bg-layer" wx:elif="{{bgImg}}"><image class="bg-img" src="{{bgImg}}" mode="aspectFill"></image><view class="bg-mask"></view></view>
+
+  <view class="page-content">
+    <view class="hero">
+      <view class="avatar"></view>
+      <view class="hero-info">
+        <text class="pname">{{user.name || '未设置'}}</text>
+        <text class="psub">{{user.gender === 'male' ? '男' : '女'}} · {{user.age}} 岁 · {{user.height}}cm</text>
+      </view>
+    </view>
+
+    <view class="stats-card">
+      <view class="st"><text class="sv">{{user.bmi || '--'}}</text><text class="sl">BMI</text></view>
+      <view class="st"><text class="sv">{{user.tdee || '--'}}</text><text class="sl">每日消耗 kcal</text></view>
+      <view class="st"><text class="sv">{{user.dailyCalories || '--'}}</text><text class="sl">每日 kcal</text></view>
+    </view>
+
+    <view class="section-title">常用</view>
+    <view class="group">
+      <view class="mi" bindtap="go" data-p="goals" hover-class="mi-hover"><view class="ic ic-goals"></view><text class="mt">体重目标</text><text class="mr">›</text></view>
+      <view class="mi" bindtap="go" data-p="calculator" hover-class="mi-hover"><view class="ic ic-calc"></view><text class="mt">BMI计算</text><text class="mr">›</text></view>
+      <view class="mi" bindtap="go" data-p="achievements" hover-class="mi-hover"><view class="ic ic-ach"></view><text class="mt">打卡成就</text><text class="mr">›</text></view>
+      <view class="mi" bindtap="go" data-p="wallpaper" hover-class="mi-hover"><view class="ic ic-bg"></view><text class="mt">背景设置</text><text class="mr">›</text></view>
+      <view class="mi" bindtap="go" data-p="settings" hover-class="mi-hover"><view class="ic ic-set"></view><text class="mt">应用设置</text><text class="mr">›</text></view>
+    </view>
+
+    <button class="btn-logout" bindtap="logout">退出登录</button>
+  </view>
+</view>

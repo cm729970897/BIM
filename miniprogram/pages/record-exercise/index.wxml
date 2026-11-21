@@ -1,0 +1,44 @@
+<view class="container theme-{{themeKey}}">
+  <view class="record-center">
+    <view class="rc-item" bindtap="goRecord" data-p="record-weight"><view class="rc-icon rc-scale"></view><text class="rc-text">记录体重</text></view>
+    <view class="rc-item" bindtap="goRecord" data-p="record-diet"><view class="rc-icon rc-food"></view><text class="rc-text">记录饮食</text></view>
+    <view class="rc-item rc-on" bindtap="goRecord" data-p="record-exercise"><view class="rc-icon rc-run"></view><text class="rc-text">记录训练</text></view>
+  </view>
+  <view class="header">记录运动</view>
+  <view class="card">
+    <view class="row">
+      <text class="label">日期</text>
+      <picker mode="date" value="{{date}}" bindchange="onDate"><text class="val">{{date}}</text></picker>
+    </view>
+    <view class="row">
+      <text class="label">运动类型</text>
+      <picker mode="selector" range="{{types}}" value="{{typeIdx}}" bindchange="onType"><text class="val">{{types[typeIdx]}}（MET {{metText}}）</text></picker>
+    </view>
+    <view class="row">
+      <text class="label">运动名称</text>
+      <input class="input" value="{{name}}" bindinput="set" data-f="name" placeholder="可选，默认用类型名"/>
+    </view>
+    <view class="row">
+      <text class="label">运动时长（分钟）</text>
+      <input class="input" type="number" value="{{duration}}" bindinput="set" data-f="duration" placeholder="请输入分钟数"/>
+    </view>
+    <view class="row">
+      <text class="label">消耗热量</text>
+      <text class="kcal-result">{{kcal}} kcal</text>
+    </view>
+  </view>
+  <view class="kcal-hint" wx:if="{{kcalHint}}">{{kcalHint}}</view>
+  <view class="action-row"><button class="btn-primary" hover-class="btn-primary-hover" bindtap="submit">保存</button></view>
+  <view class="summary">该日（{{date}}）已运动 {{todayMin}} 分钟 · 消耗 {{todayCal}} kcal</view>
+  <view class="section-title">当日训练记录</view>
+  <view class="er-list" wx:if="{{records.length}}">
+    <view class="er-item" wx:for="{{records}}" wx:key="date">
+      <view class="er-main">
+        <text class="er-name">{{item.name}}</text>
+        <text class="er-type">{{item.type}} · {{item.duration}} 分钟</text>
+      </view>
+      <text class="er-kcal">{{item.calories}} kcal</text>
+    </view>
+  </view>
+  <view class="empty" wx:else>该日暂无训练记录</view>
+</view>

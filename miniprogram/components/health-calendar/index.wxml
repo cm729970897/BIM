@@ -1,0 +1,17 @@
+<view class="cal">
+  <view class="cal-head">
+    <view class="cal-btn" bindtap="prevMonth">‹</view>
+    <view class="cal-title">{{year}}年{{month}}月</view>
+    <view class="cal-btn" bindtap="nextMonth">›</view>
+  </view>
+  <view class="cal-week">
+    <view class="cal-wd" wx:for="{{['日','一','二','三','四','五','六']}}" wx:key="*this">{{item}}</view>
+  </view>
+  <view class="cal-grid">
+    <view class="cal-row" wx:for="{{weeks}}" wx:key="index" wx:for-item="row">
+      <view class="cal-cell {{!item ? 'empty' : ''}}" wx:for="{{row}}" wx:key="date">
+        <block wx:if="{{item}}"><view class="cal-day {{item.isSelected ? 'selected' : ''}} {{item.isToday && !item.isSelected ? 'today' : ''}}" data-date="{{item.date}}" bindtap="onSelect"><text class="cal-num">{{item.day}}</text><view class="cal-dot" wx:if="{{item.isMarked}}"></view></view></block>
+      </view>
+    </view>
+  </view>
+</view>

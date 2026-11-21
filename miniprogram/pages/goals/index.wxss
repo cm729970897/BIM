@@ -1,0 +1,4 @@
+.container{padding:32rpx;background:#f6faf6;min-height:100vh}.header{font-size:40rpx;font-weight:700;margin:20rpx 0}.card{background:#fff;border-radius:24rpx;padding:28rpx}.row{display:flex;align-items:center;gap:16rpx;padding:22rpx 0;border-bottom:1rpx solid #eee}.input{margin-left:auto;text-align:right}.chip{padding:10rpx 16rpx;background:#eef3ee;border-radius:16rpx}.on{background:#3a7d44;color:#fff}.btn-primary{margin-top:40rpx;background:#3a7d44;color:#fff}
+.action-row{display:flex;justify-content:center;margin-top:24rpx}.action-row .btn-primary{width:auto;min-width:132rpx;height:58rpx;line-height:58rpx;margin:0;padding:0 30rpx;border:0;border-radius:16rpx;background:var(--accent-dark);color:#fff;font-size:26rpx;font-weight:600;box-shadow:none}
+/* Save actions follow the iOS trailing-action convention. */
+.action-row { justify-content:flex-end; }

@@ -1,0 +1,56 @@
+<view class="container theme-{{themeKey}}">
+  <view class="bg-layer" wx:if="{{bgCss}}" style="background: {{bgCss}};"><view class="bg-mask"></view></view>
+  <view class="bg-layer" wx:elif="{{bgImg}}"><image class="bg-img" src="{{bgImg}}" mode="aspectFill"></image><view class="bg-mask"></view></view>
+  <view class="page-content">
+  <view class="top-card">
+    <view class="top-left">
+      <text class="greet">你好，{{user.name || '健康用户'}}</text>
+      <text class="date">{{today}} 周{{wd}}</text>
+    </view>
+    <view class="top-right">
+      <view class="cal-entry" bindtap="openCalendar">
+        <text class="cal-entry-text">健康日历</text>
+      </view>
+      <view bindtap="refresh">
+        <image src="/static/refresh.png" class="icon" />
+      </view>
+    </view>
+  </view>
+
+<view class="section-title">今日概览</view>
+  <view class="overview-group">
+    <view class="kpi-row">
+      <view class="kpi" bindtap="goWeight">
+        <view class="sf-icon sf-figure" aria-label="体重"></view>
+        <text class="kpi-val">{{weight || '--'}}</text>
+        <text class="kpi-unit">kg</text>
+        <text class="kpi-label">当前体重</text>
+      </view>
+      <view class="kpi">
+        <view class="sf-icon sf-ruler" aria-label="BMI"></view>
+        <text class="kpi-val">{{user.bmi || '--'}}</text>
+        <text class="kpi-unit">BMI</text>
+        <text class="kpi-label">{{bmiStatus || '暂无分类'}}</text>
+      </view>
+      <view class="kpi">
+        <view class="sf-icon sf-flame" aria-label="热量"></view>
+        <text class="kpi-val">{{totalKcal}}/{{user.dailyCalories || 1500}}</text>
+        <text class="kpi-unit">kcal</text>
+        <text class="kpi-label">今日热量</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="section-title">快捷入口</view>
+  <view class="quick-grid">
+<view class="q-item" bindtap="go" data-p="trends"><view class="sf-icon sf-chart" aria-label="体重趋势"></view><text class="q-text">体重趋势</text></view>
+    <view class="q-item" bindtap="go" data-p="ai-chat"><view class="sf-icon sf-leaf" aria-label="食物助手"></view><text class="q-text">食物助手</text></view>
+    <view class="q-item" bindtap="go" data-p="training"><view class="sf-icon sf-dumbbell" aria-label="训练计划"></view><text class="q-text">训练计划</text></view>
+    <view class="q-item" bindtap="go" data-p="weekly-report"><view class="sf-icon sf-report" aria-label="每周报告"></view><text class="q-text">每周报告</text></view>
+    <view class="q-item" bindtap="go" data-p="achievements"><view class="sf-icon sf-award" aria-label="打卡成就"></view><text class="q-text">打卡成就</text></view>
+  </view>
+
+<view class="section-title">健康提示</view>
+  <view class="tip-card"><view class="sf-icon sf-bulb" aria-label="健康提示"></view><text class="tip-text">{{tip}}</text></view>
+</view>
+</view>

@@ -1,0 +1,47 @@
+<view class="container theme-{{themeKey}}">
+  <view class="preview-card">
+    <view class="preview-inner" wx:if="{{previewCss}}" style="background: {{previewCss}};"></view>
+    <image class="preview-inner" wx:elif="{{previewImg}}" src="{{previewImg}}" mode="aspectFill"></image>
+    <view class="preview-inner preview-empty" wx:else>未启用壁纸</view>
+    <view class="preview-mask"></view>
+    <text class="preview-title">背景预览</text>
+    <text class="preview-tip">选择下方壁纸或上传图片可立即预览</text>
+  </view>
+
+  <view class="section-title">内置壁纸</view>
+  <view class="grid">
+    <view class="w-card {{item.on ? 'on' : ''}}" wx:for="{{builtin}}" wx:key="id" data-id="{{item.id}}" bindlongpress="previewItem">
+      <view class="w-thumb" style="background: {{item.css}};" data-id="{{item.id}}" bindtap="previewItem"></view>
+      <view class="w-foot">
+        <text class="w-name">{{item.name}}</text>
+        <switch checked="{{item.on}}" color="#3A7D44" bindchange="toggleItem" data-id="{{item.id}}"/>
+      </view>
+    </view>
+  </view>
+
+  <view class="section-title">我的图片</view>
+  <view class="group" wx:if="{{custom.length}}">
+    <view class="c-item" wx:for="{{custom}}" wx:key="id" data-id="{{item.id}}" bindtap="previewItem">
+      <image class="c-thumb" src="{{item.path}}" mode="aspectFill"></image>
+      <text class="c-name">{{item.name}}</text>
+      <text class="c-del" catchtap="removeImage" data-id="{{item.id}}">移除</text>
+    </view>
+  </view>
+  <view class="placeholder" wx:else>还没有自定义壁纸，点下方按钮从相册或相机上传</view>
+
+  <view class="action-row"><button class="btn-add" bindtap="chooseImage">
+    <view class="ic ic-add"></view>
+    <text class="btn-add-text">上传本地图片作为壁纸</text>
+  </button></view>
+
+  <view class="section-title">自动切换</view>
+  <view class="group">
+    <picker mode="selector" range="{{intervalOptions}}" range-key="label" value="{{intervalIdx}}" bindchange="setInterval">
+      <view class="row">
+        <view class="ic ic-clock"></view>
+        <text class="label">切换间隔</text>
+        <text class="val">{{intervalText}} ▾</text>
+      </view>
+    </picker>
+  </view>
+</view>

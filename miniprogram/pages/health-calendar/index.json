@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "健康日历",
+  "usingComponents": {
+    "health-calendar": "../../components/health-calendar/index"
+  }
+}

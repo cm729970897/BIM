@@ -1,0 +1,16 @@
+<view class="container theme-{{themeKey}}">
+  <view class="header">体重趋势</view>
+  <scroll-view class="range-scroll" scroll-x enhanced show-scrollbar="{{false}}">
+    <view class="range-chip {{mode==='range' && range===item.days?'on':''}}" wx:for="{{ranges}}" wx:key="days" bindtap="setRange" data-r="{{item.days}}">{{item.label}}</view>
+    <view class="range-chip {{mode==='custom'?'on':''}}" bindtap="enableCustom">自定义</view>
+  </scroll-view>
+  <view class="custom-range-line" wx:if="{{mode==='custom'}}">
+    <text class="custom-label">查看近</text>
+    <input class="custom-days" type="number" value="{{customDays}}" placeholder="100" bindinput="onCustomDays" />
+    <text class="custom-unit">天</text>
+    <button class="custom-apply" bindtap="applyCustom">查看</button>
+  </view>
+  <view class="card"><canvas canvas-id="weightChart" class="chart" id="chart"></canvas></view>
+  <view class="card"><view class="kpi-row"><view class="kpi"><text class="val">{{stat.max || '--'}}</text><text class="lbl">最高体重</text></view><view class="kpi"><text class="val">{{stat.min || '--'}}</text><text class="lbl">最低体重</text></view><view class="kpi"><text class="val">{{stat.drop || '--'}}</text><text class="lbl">体重变化</text></view></view></view>
+  <view class="card"><view class="trend-title">历史记录（{{weights.length}} 条）</view><view class="tl-empty" wx:if="{{!weights.length}}">所选周期内暂无体重记录</view><view class="tl-item" wx:for="{{weights}}" wx:key="date"><text class="td">{{item.date}}</text><text class="tv">{{item.value}} kg</text><text class="tbmi">BMI {{item.bmi}}</text></view></view>
+</view>
