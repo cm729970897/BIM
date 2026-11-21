@@ -39,7 +39,7 @@ Page({behaviors: [require('../../behaviors/theme.js')],
     weights=weights.map(x=>({ date:x.date, value:x.weight, bmi:x.bmi }));
     const vals=weights.map(x=>x.value);
     this.setData({
-      weights,
+      weights:weights.slice().reverse(),
       stat:vals.length?{ max:Math.max(...vals).toFixed(1), min:Math.min(...vals).toFixed(1), drop:weights.length>1?(weights[0].value-weights[weights.length-1].value).toFixed(1):'0.0' }:{}
     });
     this.drawChart(weights);
